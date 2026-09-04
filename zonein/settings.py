@@ -13,9 +13,13 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 from pathlib import Path
 import os
 import dj_database_url
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+# Load environment variables from .env file if present
+load_dotenv(BASE_DIR / ".env")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
@@ -32,16 +36,19 @@ SECRET_KEY = os.environ.get(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DEBUG", "False" if IS_VERCEL else "True").lower() in ("true", "1", "t")
 
-ALLOWED_HOSTS = [
-    "localhost",
-    "127.0.0.1",
-    ".vercel.app",
-    ".now.sh",
-]
-if "ALLOWED_HOSTS" in os.environ:
-    ALLOWED_HOSTS.extend(
-        [h.strip() for h in os.environ["ALLOWED_HOSTS"].split(",") if h.strip()]
-    )
+if DEBUG:
+    ALLOWED_HOSTS = ["*"]
+else:
+    ALLOWED_HOSTS = [
+        "localhost",
+        "127.0.0.1",
+        ".vercel.app",
+        ".now.sh",
+    ]
+    if "ALLOWED_HOSTS" in os.environ:
+        ALLOWED_HOSTS.extend(
+            [h.strip() for h in os.environ["ALLOWED_HOSTS"].split(",") if h.strip()]
+        )
 
 CSRF_TRUSTED_ORIGINS = [
     "https://*.vercel.app",
