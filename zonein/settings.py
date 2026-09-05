@@ -34,7 +34,11 @@ SECRET_KEY = os.environ.get(
 )
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get("DEBUG", "False" if IS_VERCEL else "True").lower() in ("true", "1", "t")
+DEBUG = os.environ.get("DEBUG", "False" if IS_VERCEL else "True").lower() in (
+    "true",
+    "1",
+    "t",
+)
 
 if DEBUG:
     ALLOWED_HOSTS = ["*"]
@@ -56,7 +60,11 @@ CSRF_TRUSTED_ORIGINS = [
 ]
 if "CSRF_TRUSTED_ORIGINS" in os.environ:
     CSRF_TRUSTED_ORIGINS.extend(
-        [origin.strip() for origin in os.environ["CSRF_TRUSTED_ORIGINS"].split(",") if origin.strip()]
+        [
+            origin.strip()
+            for origin in os.environ["CSRF_TRUSTED_ORIGINS"].split(",")
+            if origin.strip()
+        ]
     )
 
 
@@ -69,6 +77,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "web",
 ]
 
 MIDDLEWARE = [
