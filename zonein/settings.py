@@ -34,25 +34,14 @@ SECRET_KEY = os.environ.get(
 )
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get("DEBUG", "False" if IS_VERCEL else "True").lower() in (
+DEBUG = os.environ.get("DEBUG", "True").lower() in (
     "true",
     "1",
     "t",
 )
 
-if DEBUG:
-    ALLOWED_HOSTS = ["*"]
-else:
-    ALLOWED_HOSTS = [
-        "localhost",
-        "127.0.0.1",
-        ".vercel.app",
-        ".now.sh",
-    ]
-    if "ALLOWED_HOSTS" in os.environ:
-        ALLOWED_HOSTS.extend(
-            [h.strip() for h in os.environ["ALLOWED_HOSTS"].split(",") if h.strip()]
-        )
+ALLOWED_HOSTS = ["*"]
+WHITENOISE_MANIFEST_STRICT = False
 
 CSRF_TRUSTED_ORIGINS = [
     "https://*.vercel.app",
