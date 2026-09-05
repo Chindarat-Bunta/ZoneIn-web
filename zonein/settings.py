@@ -28,9 +28,9 @@ load_dotenv(BASE_DIR / ".env")
 IS_VERCEL = os.environ.get("VERCEL") == "1"
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get(
-    "SECRET_KEY",
-    "django-insecure-d-z83s+%zl3nci54(q#8h%qln+fkw54=6()fxmqik5g1l@^s%h",
+SECRET_KEY = (
+    os.environ.get("SECRET_KEY")
+    or "django-insecure-d-z83s+%zl3nci54(q#8h%qln+fkw54=6()fxmqik5g1l@^s%h"
 )
 
 # SECURITY WARNING: don't run with debug turned on in production!
