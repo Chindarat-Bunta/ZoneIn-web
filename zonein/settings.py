@@ -114,7 +114,7 @@ WSGI_APPLICATION = "zonein.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
-if "DATABASE_URL" in os.environ:
+if os.environ.get("DATABASE_URL"):
     DATABASES = {
         "default": dj_database_url.config(
             conn_max_age=600,
